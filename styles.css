@@ -1,0 +1,56 @@
+:root {
+    --x: 128px;
+}
+
+body {
+    display: flex;
+}
+
+#bodySection {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#calculator {
+    font-size:0;
+}
+
+#display {
+    height: calc(2 * var(--x));
+    width: calc(4 * var(--x));
+    border: 1px solid black;
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+}
+
+#display p {
+    font-size: 64px;
+    bottom: 0;
+    right: 0;
+    margin: 8px 16px;
+}
+
+button {
+    height: var(--x);
+    width: var(--x);
+    margin:0;
+    padding: 0;
+    background-color: black;
+    color: white;
+    border: 0 solid black;
+}
+
+button:hover {
+    background-color: white;
+    color: black;
+}
+#clear {
+    width: calc(3 * var(--x));
+}
+
+#zero {
+    width: calc(2 * var(--x));
+}
