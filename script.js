@@ -28,7 +28,7 @@ function divide(x, y) {
     if (y === "0") {
         return error();
     }
-    return x / y;
+    return Math.round(x / y * 1000) / 1000;
 }
 
 function operate(op, first, second) {
@@ -111,6 +111,18 @@ function opButtonWrite(btn) {
         }
     })
 }
+ 
+function decimalButtonWrite(btn) {
+    buttonWrite(btn);
+    btn.addEventListener("click", () => {
+        if (editingFirst) {
+            firstNum += btn.textContent;
+        } else {
+            secondNum += btn.textContent;
+        }
+    })
+
+}
 
 function equalsEvent() {
     if (firstNum === "" || operator === null || secondNum === "") {
@@ -126,5 +138,5 @@ function equalsEvent() {
 nums.forEach(numButtonWrite);
 ops.forEach(opButtonWrite);
 clearButton.addEventListener("click", clear);
-buttonWrite(decimalButton);
+decimalButtonWrite(decimalButton);
 equalsButton.addEventListener("click", equalsEvent);
