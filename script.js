@@ -6,13 +6,14 @@ const decimalButton = document.querySelector("#decimal");
 const equalsButton = document.querySelector("#equals");
 let displayText = "";
 let firstNum = '';
-let operator = '';
+let operator = null;
 let secondNum = '';
 
 let editingFirst = true; // boolean that says whether we are editing firstNum
+let done = false; // whether evaluation is complete
 
 function add(x ,y) {
-    return x + y;
+    return parseFloat(x) + parseFloat(y);
 }
 
 function multiply(x, y) {
@@ -24,11 +25,21 @@ function subtract(x, y) {
 }
 
 function divide(x, y) {
+    if (y === "0") {
+        return error();
+    }
     return x / y;
 }
 
 function operate(op, first, second) {
     return op(first, second);
+}
+
+function error() {
+    clear();
+    displayText = "error!"
+    display.textContent = displayText;
+    return displayText;
 }
 
 function buttonWrite(btn) {
@@ -40,12 +51,24 @@ function buttonWrite(btn) {
 
 function clear() {
     displayText = "";
+    firstNum = "";
+    operator = null;
+    secondNum = "";
     display.textContent = displayText;
+    editingFirst = true;
 }
 
 function numButtonWrite(btn) {
     buttonWrite(btn);
     btn.addEventListener("click", () => {
+        if (done) {
+            clear();
+            editingFirst = true;
+            done = false;
+            displayText += btn.textContent;
+            display.textContent = displayText;
+        }
+
         if (editingFirst) {
             firstNum += btn.textContent;
         } else {
@@ -55,10 +78,53 @@ function numButtonWrite(btn) {
 }
 
 function opButtonWrite(btn) {
-    // TODO
+    buttonWrite(btn);
+    btn.addEventListener("click", () => {
+        if (done) {
+            firstNum = displayText.substring(0, displayText.length - 3);
+            secondNum = "";
+            done = false;
+        } else if (editingFirst) {
+            editingFirst = false;
+        } else if (!done && !editingFirst) {
+            equalsEvent();
+            done = false;
+            firstNum = displayText;
+            secondNum = "";
+            displayText += btn.textContent;
+            display.textContent = displayText;
+        }
+
+        switch (btn.textContent) {
+            case " + ":
+                operator = add;
+                break;
+            case " - ":
+                operator = subtract;
+                break;
+            case " x ":
+                operator = multiply;
+                break;
+            case " / ":
+                operator = divide;
+                break;
+        }
+    })
+}
+
+function equalsEvent() {
+    if (firstNum === "" || operator === null || secondNum === "") {
+        alert("error");
+    } else {
+        displayText = operate(operator, firstNum, secondNum);
+        display.textContent = displayText;
+        done = true;
+    }
+
 }
 
 nums.forEach(numButtonWrite);
-ops.forEach(buttonWrite);
+ops.forEach(opButtonWrite);
 clearButton.addEventListener("click", clear);
 buttonWrite(decimalButton);
+equalsButton.addEventListener("click", equalsEvent);
