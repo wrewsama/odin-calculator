@@ -135,8 +135,67 @@ function equalsEvent() {
 
 }
 
+function keyEvent(event) {
+    console.log(event.key);
+    switch(event.key) {
+        case "1":
+            document.querySelector("#one").click();
+            break;
+        case "2":
+            document.querySelector("#two").click();
+            break;
+        case "3":
+            document.querySelector("#three").click();
+            break;
+        case "4":
+            document.querySelector("#four").click();
+            break;
+        case "5":
+            document.querySelector("#five").click();
+            break;
+        case "6":
+            document.querySelector("#six").click();
+            break;
+        case "7":
+            document.querySelector("#seven").click();
+            break;
+        case "8":
+            document.querySelector("#eight").click();
+            break;
+        case "9":
+            document.querySelector("#nine").click();
+            break;
+        case "0":
+            document.querySelector("#zero").click();
+            break;
+        case "*":
+            document.querySelector("#times").click();
+            break;
+        case "x":
+            document.querySelector("#times").click();
+            break;
+        case "+":
+            document.querySelector("#plus").click();
+            break;
+        case "-":
+            document.querySelector("#minus").click();
+            break;
+        case "/":
+            document.querySelector("#divide").click();
+            break;
+        case ".":
+            document.querySelector("#decimal").click();
+            break;
+        case "Enter":
+            document.querySelector("#equals").click();
+            break;
+        
+    }
+}
+
 nums.forEach(numButtonWrite);
 ops.forEach(opButtonWrite);
 clearButton.addEventListener("click", clear);
 decimalButtonWrite(decimalButton);
 equalsButton.addEventListener("click", equalsEvent);
+document.addEventListener("keypress", keyEvent);

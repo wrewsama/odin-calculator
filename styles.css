@@ -6,6 +6,7 @@ body {
     display: flex;
     font-size:0;
     background-color: #EDF5E1;
+    flex-direction: column;
 }
 
 #bodySection {
@@ -14,11 +15,6 @@ body {
     justify-content: center;
     align-items: center;
 }
-
-/*
-#calculator {
-}
-*/
 
 #display {
     height: calc(2 * var(--x));
@@ -59,4 +55,17 @@ button:hover {
 
 #zero {
     width: calc(2 * var(--x));
+}
+
+#footer {
+    margin-top: 72px;
+    font-size: 24px;
+    text-align: center;
+    font-family: Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+#footer a {
+    text-decoration: none;
+    color:darkgray;
+    font-weight: bold;
 }
